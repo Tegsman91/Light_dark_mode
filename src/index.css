@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+
+*{
+  font-family: 'Prompt', sans-serif;
+}
+
+@theme {
+  --breakpoint-xs: 26rem;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
