@@ -3,18 +3,25 @@ import Hero from './components/Hero';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('darkMode')
-    return savedTheme ? JSON.parse(savedTheme) : false;
+    const savedTheme = localStorage.getItem('theme')
+
+    if(savedTheme){
+      return savedTheme === 'dark'
+    }
+    else{
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
   })
 
   useEffect(() => {
     if(darkMode){
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     }
     else{
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode])
 
   const toggleDarkMode = () => {
